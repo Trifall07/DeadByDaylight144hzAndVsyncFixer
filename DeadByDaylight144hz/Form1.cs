@@ -97,7 +97,7 @@ namespace DeadByDaylight144hz
                 writeLine(@"[/script/engine.engine]"); // Necessary script for changing hz.
                 writeLine(@"bSmoothFrameRate=false");
                 writeLine(@"SmoothedFrameRateRange=(LowerBound=(Type=Inclusive,Value=5.000000),UpperBound=(Type=Exclusive,Value=144.000000))");
-                writeLine(@"bUseVSync=false");
+                writeLine(@"bUseVSync=true");
 
                 File.SetAttributes(pathValue, File.GetAttributes(pathValue) | FileAttributes.ReadOnly); // set Engine.ini to read-only again
                 File.SetAttributes(gamePathValue, File.GetAttributes(gamePathValue) | FileAttributes.ReadOnly); // set GameUserSettings.ini to read-only again
