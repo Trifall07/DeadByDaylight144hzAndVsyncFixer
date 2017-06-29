@@ -55,10 +55,10 @@ namespace DeadByDaylight144hz
                 pathDisplayBox.Text = "Wrong File Selected (Are you sure you picked Engine.ini?)";
         }
 
-        static void lineChanger(string newText, string fileName, int line_to_edit)
+        static void lineChanger(string newText, string fileName, int line_to_edit, string containString)
         {
             string[] arrLine = File.ReadAllLines(fileName);
-            if (arrLine[line_to_edit - 1].ToLower().Contains("vsync") || arrLine[line_to_edit - 1].ToLower().Contains("frame"))
+            if (arrLine[line_to_edit - 1].ToLower().Contains(containString))
                  arrLine[line_to_edit - 1] = newText;
             File.WriteAllLines(fileName, arrLine);
         }
@@ -84,8 +84,8 @@ namespace DeadByDaylight144hz
         {
             if (pathSet)
             {
-                lineChanger("bUseVSync=false", gamePathValue, 30); // Changes Vsync setting in Game User Settings
-                lineChanger("FrameRateLimit=300.000000", gamePathValue, 43); // Changes max framerate
+                lineChanger("bUseVSync=false", gamePathValue, 30, "vsync"); // Changes Vsync setting in Game User Settings
+                lineChanger("FrameRateLimit=300.000000", gamePathValue, 43, "frame"); // Changes max framerate
 
                 var first8Lines = File.ReadLines(pathValue).Take(8).ToList(); // Grabs first 8 lines (require lines) in engine.ini, saves
                 File.WriteAllText(pathValue, String.Empty); // Clears text file
