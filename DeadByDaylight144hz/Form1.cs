@@ -41,7 +41,7 @@ namespace DeadByDaylight144hz
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
-            if (pathValue.Contains("Engine.ini"))
+            if (pathValue.ToLower().Contains("engine.ini"))
             {
                 pathValue = openFileDialog1.FileName;
                 gamePathValue = pathValue.Substring(0, pathValue.Length - 10) + "GameUserSettings.ini";
