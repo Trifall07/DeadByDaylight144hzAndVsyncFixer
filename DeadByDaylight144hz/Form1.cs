@@ -13,7 +13,7 @@ namespace DeadByDaylight144hz
 {
     public partial class Form1 : Form
     {
-        static string userName = System.Environment.UserName;
+        static string userName = System.Environment.UserName; // Gets current Users Windows name for assumed path (Auto-detection)
         public string pathValue = @"C:\Users\" + userName + @"\AppData\Local\DeadByDaylight\Saved\Config\WindowsNoEditor\Engine.ini";
         public string gamePathValue = null;
         Boolean pathSet = false;
@@ -24,7 +24,7 @@ namespace DeadByDaylight144hz
             if (File.Exists(pathValue))
             {
                 pathSet = true;
-                gamePathValue = pathValue.Substring(0, pathValue.Length - 10) + "GameUserSettings.ini";
+                gamePathValue = pathValue.Substring(0, pathValue.Length - 10) + "GameUserSettings.ini"; // Gets path for GameUserSettings.ini
                 pathDisplayBox.Text = "" + pathValue + " (Auto-detected)";
 
                 File.SetAttributes(pathValue, File.GetAttributes(pathValue) & ~FileAttributes.ReadOnly); // Get Attributes, set read only off on Engine.ini
@@ -58,7 +58,7 @@ namespace DeadByDaylight144hz
         static void lineChanger(string newText, string fileName, int line_to_edit)
         {
             string[] arrLine = File.ReadAllLines(fileName);
-            if (arrLine[line_to_edit - 1].ToLower().Contains("vsync"))
+            if (arrLine[line_to_edit - 1].ToLower().Contains("vsync") || arrLine[line_to_edit - 1].ToLower().Contains("frame"))
                  arrLine[line_to_edit - 1] = newText;
             File.WriteAllLines(fileName, arrLine);
         }
@@ -85,6 +85,7 @@ namespace DeadByDaylight144hz
             if (pathSet)
             {
                 lineChanger("bUseVSync=false", gamePathValue, 30); // Changes Vsync setting in Game User Settings
+                lineChanger("FrameRateLimit=300.000000", gamePathValue, 43); // Changes max framerate
 
                 var first8Lines = File.ReadLines(pathValue).Take(8).ToList(); // Grabs first 8 lines (require lines) in engine.ini, saves
                 File.WriteAllText(pathValue, String.Empty); // Clears text file
