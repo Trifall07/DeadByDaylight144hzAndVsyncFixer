@@ -2,7 +2,8 @@
 
 ## Requirements
 
-Make sure your .Net Framework is up-to-date, you can download/update it [here](https://www.microsoft.com/net/download/framework).
+ - Make sure your .Net Framework is up-to-date, you can download/update it [here](https://www.microsoft.com/net/download/framework).
+ - Note: Releases are EXE only. 
 
 ## Instructions
 
